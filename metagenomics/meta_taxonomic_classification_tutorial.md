@@ -401,7 +401,8 @@ Which returns both our LoD and LoQ for this sample as 5.640e+01 or 56.4
 copies/µL, and a summary of the results at each point in the sequins
 ladder:
 
-LoD = 5.640e+01 LoQ = 5.640e+01
+LoD = 5.640e+01
+LoQ = 5.640e+01
 
 | known_input_concentration | all_detected | mean_backcalc | std_backcalc | cv_percent |
 |---------------------------|--------------|---------------|--------------|------------|
@@ -455,7 +456,7 @@ kraken2-build --download-taxonomy --db "$DBNAME"
 You will need to modify the files `names.dmp` and `nodes.dmp` to be
 Sequin aware. 
 
-Download the [`update_taxonomy.py` script](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/update_taxonomy.py) provided in this repository at 
+Download the [`update_taxonomy.py`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/update_taxonomy.py) script provided in this repository at 
 `metagenomics/scripts/meta_taxonomic_classification_tutorial/`.
 
 Then run the `update_taxonomy.py` script to add Sequin taxonomy:
@@ -482,7 +483,7 @@ mv nodes.dmp names.dmp $DBNAME/taxonomy
 Next you will need to modify the Sequin FASTA file to add taxonomy IDs
 to each record. 
 
-Download the [`add_taxid.py` script](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/add_taxid.py) provided in this repository at 
+Download the [`add_taxid.py`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/add_taxid.py) script provided in this repository at 
 `metagenomics/scripts/meta_taxonomic_classification_tutorial/`.
 
 The script uses BioPython, so create a virtual env if

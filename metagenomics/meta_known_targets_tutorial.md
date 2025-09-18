@@ -74,7 +74,7 @@ These include:
 ### Tutorial scripts
 
 Helper functions for the downstream analysis of Sequins are provided in this 
-repository at [`metagenomics/scripts/meta_known_targets_tutorial/`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/MCCS_known_targets_tutorial/).
+repository at [`metagenomics/scripts/meta_known_targets_tutorial/`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_known_targets_tutorial/).
 
 ## Prepare your environment
 
@@ -363,7 +363,8 @@ print(f"LoQ = {loq:.3e}")
 Which returns both our LoD and LoQ for this sample as 56.4 copies/µL,
 and a summary of the results at each point in the sequins ladder:
 
-LoD = 5.640e+01 LoQ = 5.640e+01
+LoD = 5.640e+01
+LoQ = 5.640e+01
 
 | known_input_concentration | all_detected | mean_backcalc | std_backcalc | cv_percent |
 |----|----|----|----|----|
