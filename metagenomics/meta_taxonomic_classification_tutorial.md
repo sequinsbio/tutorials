@@ -72,11 +72,11 @@ These include:
 - Bracken output files.
 - Outputs from the downstream python analysis of the quantified Sequins.
 
-Python scripts to assist in creation of a custom Kraken2 database with
-Sequins included, located in the **database_building/** subdirectory.
+### Tutorial scripts
 
-- update_taxonomy.py
-- add_taxid.py
+Helper functions for the downstream analysis of Sequins and creation of
+a custom Kraken2 database that includes Sequins are provided in this 
+repository at [`metagenomics/scripts/meta_taxonomic_classification_tutorial/`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/).
 
 ### Custom taxonomic database
 
@@ -282,8 +282,10 @@ ng/µL and copies/µL have been performed for you and provided in the
 
 We can evaluate sequencing performance using a log-log linear regression
 between the log-transformed observed Sequin abundances and the
-log-transformed expected input values calculated above. First launch
-Python:
+log-transformed expected input values calculated above. 
+
+After downloading [`functions.py`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/functions.py) to
+your `meta_taxonomy_tutorial_data_v1/` directory, launch Python:
 
 ``` sh
 python
@@ -327,7 +329,7 @@ gcul_model = plot_sequins_ladder(
 
 <figure>
 
-<img src="figures/meta_taxonomy_tutorial.Sequins_RPK_vs_gcul_loglog.png"
+<img src="figures/meta_taxonomic_classification_tutorial/meta_taxonomy_tutorial.Sequins_RPK_vs_gcul_loglog.png"
     alt="Sequins ladder: RPK vs gc/µL"
     style="width:80%; max-width:800px; height:auto;" />
 <figcaption aria-hidden="true">
@@ -354,7 +356,7 @@ ngul_model = plot_sequins_ladder(
 <figure>
 
 <img
-src="figures/meta_taxonomy_tutorial.Sequins_read_count_vs_ngul_loglog.png"
+src="figures/meta_taxonomic_classification_tutorial/meta_taxonomy_tutorial.Sequins_read_count_vs_ngul_loglog.png"
 alt="Sequins ladder: Read Counts vs ng/µL"
 style="width:80%; max-width:800px; height:auto;" />
 <figcaption aria-hidden="true">
@@ -451,11 +453,15 @@ kraken2-build --download-taxonomy --db "$DBNAME"
 ```
 
 You will need to modify the files `names.dmp` and `nodes.dmp` to be
-Sequin aware, using the `update_taxonomy.py` script provided in
-`meta_taxonomy_tutorial_data_v1/database_building/`:
+Sequin aware. 
+
+Download the [`update_taxonomy.py` script](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/update_taxonomy.py) provided in this repository at 
+`metagenomics/scripts/meta_taxonomic_classification_tutorial/`.
+
+Then run the `update_taxonomy.py` script to add Sequin taxonomy:
 
 ``` sh
-python3 meta_taxonomy_tutorial_data_v1/database_building/update_taxonomy.py \
+python3 update_taxonomy.py \
     --nodes $DBNAME/taxonomy/nodes.dmp \
     --names $DBNAME/taxonomy/names.dmp \
     --abundances metagenomics_core_control_set_v2/metasequin_abundances.csv
@@ -474,7 +480,12 @@ mv nodes.dmp names.dmp $DBNAME/taxonomy
 ```
 
 Next you will need to modify the Sequin FASTA file to add taxonomy IDs
-to each record. The script uses BioPython, so create a virtual env if
+to each record. 
+
+Download the [`add_taxid.py` script](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_taxonomic_classification_tutorial/add_taxid.py) provided in this repository at 
+`metagenomics/scripts/meta_taxonomic_classification_tutorial/`.
+
+The script uses BioPython, so create a virtual env if
 you don’t already have this installed:
 
 ``` sh
@@ -487,7 +498,7 @@ Then run the `add_taxid.py` script to add the taxonomy IDs passing the
 `names.dmp` you produced in the previous step:
 
 ``` sh
-python3 meta_taxonomy_tutorial_data_v1/database_building/add_taxid.py \
+python3 add_taxid.py \
     --names $DBNAME/taxonomy/names.dmp \
     --fasta metagenomics_core_control_set_v2/metasequin_sequences.fa \
     >metasequin_sequences_with_taxid.fa

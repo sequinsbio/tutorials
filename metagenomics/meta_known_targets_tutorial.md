@@ -52,18 +52,12 @@ files for running the tutorial include:
   A standard multi-FASTA file containing the reference genomes of the
   microbial target species.
 
-- **meta_tutorial_data_v1_R1.fastq.gz,
-  meta_tutorial_data_v1_R2.fastq.gz**  
+- **meta_tutorial_data_v1_R1.fastq.gz,meta_tutorial_data_v1_R2.fastq.gz**  
   Raw FASTQ files for the example sample.
 
 - **metasequin_abundances_example.csv**  
   A metasequins abundances file with pre-computed ng/µL and copies/µL
   values for each Sequin in the sample.
-
-- **functions.py**  
-  Python helper functions for normalising quantified read counts,
-  plotting Sequins ladders, and calculating limit of
-  detection/quantification.
 
 Intermediary files from each analysis stage are included in the
 **intermediatory_files/** directory to allow continuation of the
@@ -76,6 +70,11 @@ These include:
 - The aligned BAM file and its index.  
 - Quantified abundances generated with bedtools multicov.  
 - Outputs from the downstream Python analysis of quantified Sequins.
+
+### Tutorial scripts
+
+Helper functions for the downstream analysis of Sequins are provided in this 
+repository at [`metagenomics/scripts/meta_known_targets_tutorial/`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/MCCS_known_targets_tutorial/).
 
 ## Prepare your environment
 
@@ -160,7 +159,7 @@ faidx --transform bed microbial_with_sequins.fa > microbial_with_sequins.bed
 ### Perform quality control of raw sequencing data
 
 Whether quality control and pre-processing is necessary and to what
-extent is dataset-specific and as such tools and parameters should be
+extent is dataset-specific and as such, tools and parameters should be
 selected accordingly. Below is an example of adaptor/quality trimming
 and filtering of raw sequencing data with fastp:
 
@@ -254,8 +253,10 @@ ng/µL and copies/µL have been performed for you and provided in the
 
 We can evaluate sequencing performance using a log-log linear regression
 between the log-transformed observed Sequin abundances and the
-log-transformed expected input values calculated above. First launch
-Python:
+log-transformed expected input values calculated above. 
+
+After downloading [`functions.py`](https://github.com/sequinsbio/tutorials/blob/main/metagenomics/scripts/meta_known_targets_tutorial/functions.py) to
+your `meta_tutorial_data_v1/` directory, launch Python:
 
 ``` sh
 python
@@ -300,7 +301,7 @@ gcul_model = plot_sequins_ladder(
 
 <figure>
 <img
-src="figures/meta_reference_tutorial.Sequins_RPK_vs_gcul_loglog.png"
+src="figures/meta_known_targets_tutorial/meta_reference_tutorial.Sequins_RPK_vs_gcul_loglog.png"
 alt="Sequins ladder: RPK vs gc/µL" />
 <figcaption aria-hidden="true">Sequins ladder: RPK vs gc/µL</figcaption>
 </figure>
@@ -321,7 +322,7 @@ ngul_model = plot_sequins_ladder(
 
 <figure>
 <img
-src="figures/meta_reference_tutorial.Sequins_read_count_vs_ngul_loglog.png"
+src="figures/meta_known_targets_tutorial/meta_reference_tutorial.Sequins_read_count_vs_ngul_loglog.png"
 alt="Sequins ladder: Read Counts vs ng/µL" />
 <figcaption aria-hidden="true">Sequins ladder: Read Counts vs
 ng/µL</figcaption>
